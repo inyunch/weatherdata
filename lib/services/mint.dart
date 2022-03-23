@@ -1,16 +1,16 @@
 // To parse this JSON data, do
 //
-//     final welcome = welcomeFromJson(jsonString);
+//     final welcome = welcomeFromMap(jsonString);
 
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-Mint mintFromJson(String str) => Mint.fromJson(json.decode(str));
+Welcome welcomeFromMap(String str) => Welcome.fromMap(json.decode(str));
 
-String mintToJson(Mint data) => json.encode(data.toJson());
+String welcomeToMap(Welcome data) => json.encode(data.toMap());
 
-class Mint {
-  Mint({
+class Welcome {
+  Welcome({
     required this.success,
     required this.result,
     required this.records,
@@ -20,16 +20,16 @@ class Mint {
   Result result;
   Records records;
 
-  factory Mint.fromJson(Map<String, dynamic> json) => Mint(
+  factory Welcome.fromMap(Map<String, dynamic> json) => Welcome(
     success: json["success"],
-    result: Result.fromJson(json["result"]),
-    records: Records.fromJson(json["records"]),
+    result: Result.fromMap(json["result"]),
+    records: Records.fromMap(json["records"]),
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
     "success": success,
-    "result": result.toJson(),
-    "records": records.toJson(),
+    "result": result.toMap(),
+    "records": records.toMap(),
   };
 }
 
@@ -40,12 +40,12 @@ class Records {
 
   List<RecordsLocation> locations;
 
-  factory Records.fromJson(Map<String, dynamic> json) => Records(
-    locations: List<RecordsLocation>.from(json["locations"].map((x) => RecordsLocation.fromJson(x))),
+  factory Records.fromMap(Map<String, dynamic> json) => Records(
+    locations: List<RecordsLocation>.from(json["locations"].map((x) => RecordsLocation.fromMap(x))),
   );
 
-  Map<String, dynamic> toJson() => {
-    "locations": List<dynamic>.from(locations.map((x) => x.toJson())),
+  Map<String, dynamic> toMap() => {
+    "locations": List<dynamic>.from(locations.map((x) => x.toMap())),
   };
 }
 
@@ -62,18 +62,18 @@ class RecordsLocation {
   String dataid;
   List<LocationLocation> location;
 
-  factory RecordsLocation.fromJson(Map<String, dynamic> json) => RecordsLocation(
+  factory RecordsLocation.fromMap(Map<String, dynamic> json) => RecordsLocation(
     datasetDescription: json["datasetDescription"],
     locationsName: json["locationsName"],
     dataid: json["dataid"],
-    location: List<LocationLocation>.from(json["location"].map((x) => LocationLocation.fromJson(x))),
+    location: List<LocationLocation>.from(json["location"].map((x) => LocationLocation.fromMap(x))),
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
     "datasetDescription": datasetDescription,
     "locationsName": locationsName,
     "dataid": dataid,
-    "location": List<dynamic>.from(location.map((x) => x.toJson())),
+    "location": List<dynamic>.from(location.map((x) => x.toMap())),
   };
 }
 
@@ -92,20 +92,20 @@ class LocationLocation {
   String lon;
   List<WeatherElement> weatherElement;
 
-  factory LocationLocation.fromJson(Map<String, dynamic> json) => LocationLocation(
+  factory LocationLocation.fromMap(Map<String, dynamic> json) => LocationLocation(
     locationName: json["locationName"],
     geocode: json["geocode"],
     lat: json["lat"],
     lon: json["lon"],
-    weatherElement: List<WeatherElement>.from(json["weatherElement"].map((x) => WeatherElement.fromJson(x))),
+    weatherElement: List<WeatherElement>.from(json["weatherElement"].map((x) => WeatherElement.fromMap(x))),
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
     "locationName": locationName,
     "geocode": geocode,
     "lat": lat,
     "lon": lon,
-    "weatherElement": List<dynamic>.from(weatherElement.map((x) => x.toJson())),
+    "weatherElement": List<dynamic>.from(weatherElement.map((x) => x.toMap())),
   };
 }
 
@@ -120,16 +120,16 @@ class WeatherElement {
   String description;
   List<Time> time;
 
-  factory WeatherElement.fromJson(Map<String, dynamic> json) => WeatherElement(
+  factory WeatherElement.fromMap(Map<String, dynamic> json) => WeatherElement(
     elementName: json["elementName"],
     description: json["description"],
-    time: List<Time>.from(json["time"].map((x) => Time.fromJson(x))),
+    time: List<Time>.from(json["time"].map((x) => Time.fromMap(x))),
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
     "elementName": elementName,
     "description": description,
-    "time": List<dynamic>.from(time.map((x) => x.toJson())),
+    "time": List<dynamic>.from(time.map((x) => x.toMap())),
   };
 }
 
@@ -144,16 +144,16 @@ class Time {
   DateTime endTime;
   List<ElementValue> elementValue;
 
-  factory Time.fromJson(Map<String, dynamic> json) => Time(
+  factory Time.fromMap(Map<String, dynamic> json) => Time(
     startTime: DateTime.parse(json["startTime"]),
     endTime: DateTime.parse(json["endTime"]),
-    elementValue: List<ElementValue>.from(json["elementValue"].map((x) => ElementValue.fromJson(x))),
+    elementValue: List<ElementValue>.from(json["elementValue"].map((x) => ElementValue.fromMap(x))),
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
     "startTime": startTime.toIso8601String(),
     "endTime": endTime.toIso8601String(),
-    "elementValue": List<dynamic>.from(elementValue.map((x) => x.toJson())),
+    "elementValue": List<dynamic>.from(elementValue.map((x) => x.toMap())),
   };
 }
 
@@ -166,12 +166,12 @@ class ElementValue {
   String value;
   String measures;
 
-  factory ElementValue.fromJson(Map<String, dynamic> json) => ElementValue(
+  factory ElementValue.fromMap(Map<String, dynamic> json) => ElementValue(
     value: json["value"],
     measures: json["measures"],
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
     "value": value,
     "measures": measures,
   };
@@ -186,14 +186,14 @@ class Result {
   String resourceId;
   List<Field> fields;
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory Result.fromMap(Map<String, dynamic> json) => Result(
     resourceId: json["resource_id"],
-    fields: List<Field>.from(json["fields"].map((x) => Field.fromJson(x))),
+    fields: List<Field>.from(json["fields"].map((x) => Field.fromMap(x))),
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
     "resource_id": resourceId,
-    "fields": List<dynamic>.from(fields.map((x) => x.toJson())),
+    "fields": List<dynamic>.from(fields.map((x) => x.toMap())),
   };
 }
 
@@ -206,12 +206,12 @@ class Field {
   String id;
   String type;
 
-  factory Field.fromJson(Map<String, dynamic> json) => Field(
+  factory Field.fromMap(Map<String, dynamic> json) => Field(
     id: json["id"],
     type: json["type"],
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
     "id": id,
     "type": type,
   };
