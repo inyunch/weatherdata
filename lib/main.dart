@@ -8,7 +8,7 @@ import 'dart:async';
 
 void main() async{
   runApp(MyApp());
-  //ApiData();
+  getData ();
 }
 
 class MyApp extends StatelessWidget {
@@ -92,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   borderRadius: BorderRadius.circular(8)),
               title: Text('未來7天的最低溫度'),
               //subtitle: Text(),
-              subtitle: Text(_getMint()),
+              subtitle: Text('in card'),
               children: [
                 for (var i = 0; i < 7; i++)
                   ListTile(
@@ -230,11 +230,9 @@ class _MyHomePageState extends State<MyHomePage> {
 //   String type;
 // }
 
-class ApiDate {
-  void getDate() async {
+void getData() async {
     var url = Uri.parse('https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-063?Authorization=CWB-AF051CEE-9972-4C1E-92FB-FF0604BAED32&format=JSON&locationName=%E5%8D%97%E6%B8%AF%E5%8D%80&elementName=MinT');
     var reponse = await http.get(url);
     print("reponse: ");
     print(reponse.body);
-  }
 }
